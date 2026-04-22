@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@iconify-json/logos": "^1.2.11",
-    "eslint": "^10.2.0",
+    "rolldown": "1.0.0-rc.16",
     "typescript": "^6.0.2",
     "vite-plus": "catalog:",
     "vue-tsc": "^3.2.6"
