@@ -23,7 +23,6 @@ This project is using Vite+, a unified toolchain built on top of Vite, Rolldown,
 - check - Run format, lint, and TypeScript type checks
 - lint - Lint code
 - fmt - Format code
-- test - Run tests
 
 ### Execute
 
