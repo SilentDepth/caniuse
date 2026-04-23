@@ -27,17 +27,10 @@ useSeoMeta({
 
 <template>
   <UApp>
-    <div class="isolate relative min-h-dvh antialiased">
-      <div
-        aria-hidden="true"
-        class="pointer-events-none fixed inset-0 bg-[var(--page-shell-overlay)]"
-      />
-
+    <div class="min-h-dvh relative">
       <CanIUseHeader v-model="eligibilityMonths" />
-
       <main class="relative pb-12">
         <CanIUseTabNav v-model="selectedTab" :items="tabItems" />
-
         <section
           v-if="status === 'pending'"
           class="mx-auto mt-8 max-w-6xl space-y-4 px-4 sm:px-6 lg:px-8"
@@ -48,7 +41,6 @@ useSeoMeta({
             class="h-40 animate-pulse rounded-2xl border border-[var(--page-divider)] bg-[var(--page-empty-bg)]"
           />
         </section>
-
         <section v-else-if="errorMessage" class="mx-auto mt-8 max-w-6xl px-4 sm:px-6 lg:px-8">
           <div class="rounded-2xl border border-error/30 bg-[var(--page-error-bg)] p-5 text-sm">
             <p class="font-semibold text-error">Failed to load dataset.</p>
@@ -57,7 +49,6 @@ useSeoMeta({
             }}</pre>
           </div>
         </section>
-
         <CanIUseFeatureGroups v-else :groups="activeGroups" :tab="activeTab" />
       </main>
     </div>

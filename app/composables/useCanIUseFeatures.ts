@@ -99,14 +99,6 @@ function formatMonthLabel(value: Date) {
   return month ? `${year} ${month}` : `${year}`
 }
 
-export function formatSpecHostname(url: string) {
-  try {
-    return new URL(url).hostname.replace(/^www\./, '')
-  } catch {
-    return url
-  }
-}
-
 function getTrackingWindow(referenceMonthStart: Date) {
   return {
     currentMonthStart: referenceMonthStart,

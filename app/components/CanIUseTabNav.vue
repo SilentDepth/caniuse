@@ -16,7 +16,7 @@ const emit = defineEmits<{
 
 <template>
   <div
-    class="sticky top-0 z-10 border-b border-[var(--page-divider-soft)] bg-[var(--page-tabs-bg)] shadow-[inset_0_1px_0_rgb(255_255_255_/_0.45)] [backdrop-filter:blur(18px)] [-webkit-backdrop-filter:blur(18px)] dark:shadow-[inset_0_1px_0_rgb(255_255_255_/_0.02)]"
+    class="sticky top-0 z-10 border-b border-(--page-divider-soft) bg-(--page-tabs-bg) shadow-[inset_0_1px_0_rgb(255_255_255/0.45)] dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.02)] backdrop-blur-lg"
   >
     <UTabs
       :model-value="modelValue"
@@ -30,7 +30,7 @@ const emit = defineEmits<{
         root: 'block',
         list: 'gap-3',
         trigger:
-          'px-1 py-4 text-sm text-[var(--page-text-muted)] transition-colors data-[state=active]:text-[var(--page-text)]',
+          'px-0 py-2 text-sm text-[var(--page-text-muted)] transition-colors data-[state=active]:text-[var(--page-text)]',
       }"
       @update:model-value="value => emit('update:modelValue', value as FeatureTabId)"
     />
