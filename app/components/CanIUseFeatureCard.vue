@@ -21,24 +21,32 @@ defineProps<{
 </script>
 
 <template>
-  <article class="feature-card grid gap-4 rounded-2xl border lg:grid-cols-[2fr_1fr]">
-    <div class="feature-card-body p-4 space-y-4">
+  <article
+    class="grid gap-4 rounded-2xl border border-[var(--page-divider-soft)] bg-[var(--page-card-bg)] shadow-[var(--page-shadow)] hover:border-[var(--page-card-hover-border)] lg:grid-cols-[2fr_1fr]"
+  >
+    <div class="space-y-4 bg-[var(--page-card-body-bg)] p-4">
       <div class="flex flex-wrap items-center gap-2">
         <span
-          class="feature-badge rounded-full px-2.5 py-1 text-xs font-medium"
-          :class="tab.id === 'recent' ? 'feature-badge--recent' : 'feature-badge--upcoming'"
+          class="rounded-full border border-transparent px-2.5 py-1 text-xs font-medium"
+          :class="
+            tab.id === 'recent'
+              ? 'border-[var(--page-badge-recent-border)] bg-[var(--page-badge-recent-bg)] text-[var(--page-badge-recent-text)]'
+              : 'border-[var(--page-badge-upcoming-border)] bg-[var(--page-badge-upcoming-bg)] text-[var(--page-badge-upcoming-text)]'
+          "
         >
           {{ tab.label }}
         </span>
-        <h3 class="feature-title text-xl font-semibold">
+        <h3 class="text-xl font-semibold text-[var(--page-text)]">
           {{ feature.name }}
         </h3>
-        <code class="feature-code rounded-full border px-2.5 py-1 text-xs">
+        <code
+          class="rounded-full border border-[var(--page-divider-soft)] bg-[var(--page-code-bg)] px-2.5 py-1 text-xs text-[var(--page-text-muted)]"
+        >
           {{ feature.id }}
         </code>
       </div>
 
-      <p v-if="feature.description" class="feature-description max-w-4xl text-sm leading-6">
+      <p v-if="feature.description" class="max-w-4xl text-sm/6 text-[var(--page-text-soft)]">
         {{ feature.description }}
       </p>
 
@@ -49,35 +57,49 @@ defineProps<{
           :href="url"
           target="_blank"
           rel="noreferrer"
-          class="feature-link hover:underline"
+          class="text-[var(--page-link)] hover:text-[var(--page-link-hover)] hover:underline"
         >
           {{ formatSpecHostname(url) }}
         </a>
       </div>
     </div>
-    <dl class="feature-card-meta text-sm flex flex-col border-l">
-      <div class="p-4">
-        <dt class="feature-label text-xs uppercase tracking-[0.18em]">Baseline low date</dt>
-        <dd class="feature-date mt-2 font-semibold">
+    <dl
+      class="flex flex-col border-l border-[var(--page-divider-soft)] bg-[var(--page-card-meta-bg)] text-sm"
+    >
+      <div class="border-b border-[var(--page-divider-soft)] p-4 last:border-b-0">
+        <dt
+          class="text-xs uppercase tracking-[0.18em] text-[color:color-mix(in_srgb,var(--color-olive-600)_72%,white)]"
+        >
+          Baseline low date
+        </dt>
+        <dd class="mt-2 font-semibold text-[var(--page-text)]">
           {{ feature.baselineLowDate }}
         </dd>
       </div>
-      <div class="p-4">
-        <dt class="feature-label text-xs uppercase tracking-[0.18em]">Available at</dt>
-        <dd class="feature-date mt-2 font-semibold">
+      <div class="border-b border-[var(--page-divider-soft)] p-4 last:border-b-0">
+        <dt
+          class="text-xs uppercase tracking-[0.18em] text-[color:color-mix(in_srgb,var(--color-olive-600)_72%,white)]"
+        >
+          Available at
+        </dt>
+        <dd class="mt-2 font-semibold text-[var(--page-text)]">
           {{ feature.availableAt }}
         </dd>
       </div>
       <div class="p-4">
-        <dt class="feature-label text-xs uppercase tracking-[0.18em]">Support versions</dt>
+        <dt
+          class="text-xs uppercase tracking-[0.18em] text-[color:color-mix(in_srgb,var(--color-olive-600)_72%,white)]"
+        >
+          Support versions
+        </dt>
         <dd
-          class="feature-support mt-3 grid gap-4"
-          :style="{ gridTemplateColumns: `repeat(${CORE_BROWSERS.length}, 1fr)` }"
+          class="mt-3 grid gap-4 text-[var(--page-text-soft)] [grid-template-columns:repeat(var(--browser-count),minmax(0,1fr))]"
+          :style="{ '--browser-count': CORE_BROWSERS.length }"
         >
           <span
             v-for="browser in CORE_BROWSERS"
             :key="browser"
-            class="inline-flex items-center gap-[0.5em]"
+            class="inline-flex items-center gap-2"
           >
             <UIcon :name="browserIcons[browser]" class="size-5 shrink-0" />
             <span>

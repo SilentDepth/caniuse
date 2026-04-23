@@ -15,7 +15,9 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="page-tabs sticky top-0 z-10 border-b">
+  <div
+    class="sticky top-0 z-10 border-b border-[var(--page-divider-soft)] bg-[var(--page-tabs-bg)] shadow-[inset_0_1px_0_rgb(255_255_255_/_0.45)] [backdrop-filter:blur(18px)] [-webkit-backdrop-filter:blur(18px)] dark:shadow-[inset_0_1px_0_rgb(255_255_255_/_0.02)]"
+  >
     <UTabs
       :model-value="modelValue"
       :items="items"

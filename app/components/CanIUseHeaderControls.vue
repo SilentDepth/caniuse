@@ -48,7 +48,7 @@ const themeMenuItems = computed(() =>
 
 <template>
   <div class="grid w-full gap-3 sm:grid-cols-2 lg:w-full">
-    <UFormField :label="windowLabel" class="header-field">
+    <UFormField :label="windowLabel" :ui="{ label: 'text-[var(--page-text-muted)]' }">
       <UInputNumber
         :model-value="modelValue"
         :min="1"
@@ -57,12 +57,12 @@ const themeMenuItems = computed(() =>
         :default-value="DEFAULT_ELIGIBILITY_MONTHS"
         size="sm"
         class="w-full"
-        :ui="{ base: 'header-input tabular-nums' }"
+        :ui="{ base: 'h-9 min-h-9 tabular-nums' }"
         @update:model-value="handleUpdate"
       />
     </UFormField>
 
-    <UFormField label="Color Scheme" class="header-field">
+    <UFormField label="Color Scheme" :ui="{ label: 'text-[var(--page-text-muted)]' }">
       <ClientOnly>
         <UDropdownMenu
           :items="themeMenuItems"
@@ -76,7 +76,7 @@ const themeMenuItems = computed(() =>
             color="neutral"
             variant="outline"
             size="sm"
-            class="header-input w-full justify-between"
+            class="h-9 min-h-9 w-full justify-between"
           />
         </UDropdownMenu>
 
@@ -88,7 +88,7 @@ const themeMenuItems = computed(() =>
             color="neutral"
             variant="outline"
             size="sm"
-            class="header-input w-full justify-between"
+            class="h-9 min-h-9 w-full justify-between"
             disabled
           />
         </template>
