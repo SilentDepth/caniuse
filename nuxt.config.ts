@@ -6,6 +6,10 @@ export default defineNuxtConfig({
     enabled: true,
   },
 
+  colorMode: {
+    preference: 'system',
+  },
+
   modules: ['@nuxt/ui', '@nuxt/hints', '@nuxt/a11y', '@vueuse/nuxt'],
 
   css: ['~/assets/css/main.css'],

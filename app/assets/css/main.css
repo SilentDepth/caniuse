@@ -21,24 +21,93 @@
   --page-bg: #f4f3ea;
   --page-bg-deep: #e8ecdf;
   --page-bg-soft: #fbfaf4;
-  --page-line: color-mix(in srgb, var(--color-olive-300) 48%, white);
-  --page-line-strong: color-mix(in srgb, var(--color-olive-400) 58%, white);
-  --page-surface: rgb(255 255 255 / 0.72);
-  --page-surface-strong: rgb(255 255 255 / 0.92);
-  --page-surface-muted: color-mix(in srgb, var(--color-olive-50) 80%, white);
   --page-text: color-mix(in srgb, var(--color-olive-950) 82%, black);
   --page-text-soft: color-mix(in srgb, var(--color-olive-700) 76%, black);
   --page-text-muted: color-mix(in srgb, var(--color-olive-600) 72%, white);
   --page-link: color-mix(in srgb, var(--color-teal-700) 88%, var(--color-olive-800));
   --page-link-hover: color-mix(in srgb, var(--color-teal-800) 92%, black);
   --page-shadow: 0 20px 60px rgb(76 93 67 / 0.08);
+  --page-shell-bg:
+    radial-gradient(circle at 0% 0%, rgb(90 196 172 / 0.16), transparent 26%),
+    radial-gradient(circle at 100% 10%, rgb(160 177 119 / 0.14), transparent 24%);
+  --page-shell-overlay:
+    linear-gradient(180deg, rgb(255 255 255 / 0.22), transparent 22%),
+    linear-gradient(180deg, transparent 76%, rgb(114 132 92 / 0.08));
+  --page-header-bg:
+    linear-gradient(180deg, rgb(255 255 255 / 0.82), rgb(250 249 243 / 0.72)),
+    linear-gradient(90deg, rgb(93 202 178 / 0.08), transparent 36%, rgb(151 168 112 / 0.08));
+  --page-tabs-bg:
+    linear-gradient(180deg, rgb(248 247 241 / 0.9), rgb(246 245 238 / 0.78)),
+    linear-gradient(90deg, transparent, rgb(85 190 166 / 0.08), transparent);
+  --page-divider: rgb(119 138 98 / 0.18);
+  --page-divider-soft: rgb(119 138 98 / 0.14);
+  --page-count-bg: rgb(255 255 255 / 0.7);
+  --page-card-bg:
+    linear-gradient(180deg, rgb(255 255 255 / 0.9), rgb(252 251 247 / 0.82)),
+    linear-gradient(120deg, rgb(91 199 176 / 0.05), transparent 36%, rgb(154 171 116 / 0.06));
+  --page-card-body-bg: linear-gradient(180deg, rgb(255 255 255 / 0.18), transparent 34%);
+  --page-card-meta-bg:
+    linear-gradient(180deg, rgb(246 246 240 / 0.92), rgb(242 244 235 / 0.84)),
+    linear-gradient(180deg, transparent, rgb(118 140 93 / 0.04));
+  --page-card-hover-border: rgb(88 166 147 / 0.26);
+  --page-code-bg: rgb(245 246 240 / 0.92);
+  --page-empty-bg:
+    linear-gradient(180deg, rgb(255 255 255 / 0.75), rgb(249 248 242 / 0.7)),
+    linear-gradient(120deg, rgb(91 199 176 / 0.04), transparent 40%, rgb(154 171 116 / 0.04));
+  --page-error-bg: rgb(140 42 42 / 0.08);
+  --page-badge-recent-bg: rgb(79 196 170 / 0.14);
+  --page-badge-recent-border: rgb(79 196 170 / 0.24);
+  --page-badge-recent-text: color-mix(in srgb, var(--color-teal-800) 78%, var(--color-olive-900));
+  --page-badge-upcoming-bg: rgb(164 148 84 / 0.12);
+  --page-badge-upcoming-border: rgb(164 148 84 / 0.2);
+  --page-badge-upcoming-text: color-mix(in srgb, var(--color-olive-800) 76%, #7c5600);
 }
 
 html {
+  color-scheme: light;
   background:
     radial-gradient(circle at top left, rgb(111 214 194 / 0.2), transparent 32%),
     radial-gradient(circle at top right, rgb(170 187 130 / 0.18), transparent 28%),
     linear-gradient(180deg, var(--page-bg-soft) 0%, var(--page-bg) 46%, var(--page-bg-deep) 100%);
+}
+
+html.dark {
+  color-scheme: dark;
+  --page-bg: #111710;
+  --page-bg-deep: #0b100c;
+  --page-bg-soft: #1a2219;
+  --page-text: rgb(236 241 232 / 0.96);
+  --page-text-soft: rgb(201 212 194 / 0.84);
+  --page-text-muted: rgb(166 182 158 / 0.74);
+  --page-link: color-mix(in srgb, var(--color-teal-300) 68%, white);
+  --page-link-hover: color-mix(in srgb, var(--color-teal-200) 76%, white);
+  --page-shadow: none;
+  --page-shell-bg: linear-gradient(180deg, rgb(19 26 20 / 0.98), rgb(11 16 12 / 0.98));
+  --page-shell-overlay: none;
+  --page-header-bg: linear-gradient(180deg, rgb(21 28 22 / 0.96), rgb(17 23 18 / 0.94));
+  --page-tabs-bg: linear-gradient(180deg, rgb(19 26 20 / 0.98), rgb(16 22 17 / 0.96));
+  --page-divider: rgb(132 150 122 / 0.18);
+  --page-divider-soft: rgb(132 150 122 / 0.16);
+  --page-count-bg: rgb(30 38 31 / 0.92);
+  --page-card-bg: linear-gradient(180deg, rgb(26 33 27 / 0.96), rgb(21 28 22 / 0.96));
+  --page-card-body-bg: none;
+  --page-card-meta-bg: linear-gradient(180deg, rgb(22 29 23 / 0.98), rgb(18 24 19 / 0.98));
+  --page-card-hover-border: rgb(108 189 166 / 0.32);
+  --page-code-bg: rgb(29 37 30 / 0.96);
+  --page-empty-bg: linear-gradient(180deg, rgb(24 31 25 / 0.94), rgb(20 26 21 / 0.96));
+  --page-error-bg: rgb(120 41 41 / 0.16);
+  --page-badge-recent-bg: rgb(68 179 154 / 0.18);
+  --page-badge-recent-border: rgb(68 179 154 / 0.28);
+  --page-badge-recent-text: rgb(210 244 236 / 0.96);
+  --page-badge-upcoming-bg: rgb(120 112 64 / 0.22);
+  --page-badge-upcoming-border: rgb(146 134 78 / 0.28);
+  --page-badge-upcoming-text: rgb(232 225 190 / 0.94);
+  background: linear-gradient(
+    180deg,
+    var(--page-bg-soft) 0%,
+    var(--page-bg) 48%,
+    var(--page-bg-deep) 100%
+  );
 }
 
 body {
@@ -48,9 +117,7 @@ body {
 .app-shell {
   position: relative;
   min-height: 100dvh;
-  background:
-    radial-gradient(circle at 0% 0%, rgb(90 196 172 / 0.16), transparent 26%),
-    radial-gradient(circle at 100% 10%, rgb(160 177 119 / 0.14), transparent 24%);
+  background: var(--page-shell-bg);
 }
 
 .app-shell::before {
@@ -58,9 +125,7 @@ body {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(180deg, rgb(255 255 255 / 0.22), transparent 22%),
-    linear-gradient(180deg, transparent 76%, rgb(114 132 92 / 0.08));
+  background: var(--page-shell-overlay);
 }
 
 .page-header,
@@ -70,18 +135,18 @@ body {
 }
 
 .page-header {
-  background:
-    linear-gradient(180deg, rgb(255 255 255 / 0.82), rgb(250 249 243 / 0.72)),
-    linear-gradient(90deg, rgb(93 202 178 / 0.08), transparent 36%, rgb(151 168 112 / 0.08));
-  border-color: rgb(119 138 98 / 0.18);
+  background: var(--page-header-bg);
+  border-color: var(--page-divider);
 }
 
 .page-tabs {
-  background:
-    linear-gradient(180deg, rgb(248 247 241 / 0.9), rgb(246 245 238 / 0.78)),
-    linear-gradient(90deg, transparent, rgb(85 190 166 / 0.08), transparent);
-  border-color: rgb(119 138 98 / 0.16);
+  background: var(--page-tabs-bg);
+  border-color: var(--page-divider-soft);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.45);
+}
+
+html.dark .page-tabs {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.02);
 }
 
 .page-heading {
@@ -95,33 +160,33 @@ body {
 }
 
 .feature-group-count {
-  background: rgb(255 255 255 / 0.7);
-  border-color: rgb(119 138 98 / 0.18);
+  background: var(--page-count-bg);
+  border-color: var(--page-divider);
   color: var(--page-text-muted);
 }
 
 .feature-card {
   overflow: hidden;
-  border-color: rgb(119 138 98 / 0.15);
-  background:
-    linear-gradient(180deg, rgb(255 255 255 / 0.9), rgb(252 251 247 / 0.82)),
-    linear-gradient(120deg, rgb(91 199 176 / 0.05), transparent 36%, rgb(154 171 116 / 0.06));
+  border-color: var(--page-divider-soft);
+  background: var(--page-card-bg);
   box-shadow: var(--page-shadow);
 }
 
 .feature-card:hover {
-  border-color: rgb(88 166 147 / 0.26);
+  border-color: var(--page-card-hover-border);
 }
 
 .feature-card-body {
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.18), transparent 34%);
+  background: var(--page-card-body-bg);
 }
 
 .feature-card-meta {
-  background:
-    linear-gradient(180deg, rgb(246 246 240 / 0.92), rgb(242 244 235 / 0.84)),
-    linear-gradient(180deg, transparent, rgb(118 140 93 / 0.04));
-  border-color: rgb(119 138 98 / 0.14);
+  background: var(--page-card-meta-bg);
+  border-color: var(--page-divider-soft);
+}
+
+.feature-card-meta > :not(:last-child) {
+  border-bottom: 1px solid var(--page-divider-soft);
 }
 
 .feature-badge {
@@ -129,20 +194,20 @@ body {
 }
 
 .feature-badge--recent {
-  background: rgb(79 196 170 / 0.14);
-  border-color: rgb(79 196 170 / 0.24);
-  color: color-mix(in srgb, var(--color-teal-800) 78%, var(--color-olive-900));
+  background: var(--page-badge-recent-bg);
+  border-color: var(--page-badge-recent-border);
+  color: var(--page-badge-recent-text);
 }
 
 .feature-badge--upcoming {
-  background: rgb(164 148 84 / 0.12);
-  border-color: rgb(164 148 84 / 0.2);
-  color: color-mix(in srgb, var(--color-olive-800) 76%, #7c5600);
+  background: var(--page-badge-upcoming-bg);
+  border-color: var(--page-badge-upcoming-border);
+  color: var(--page-badge-upcoming-text);
 }
 
 .feature-code {
-  border-color: rgb(119 138 98 / 0.16);
-  background: rgb(245 246 240 / 0.92);
+  border-color: var(--page-divider-soft);
+  background: var(--page-code-bg);
   color: var(--page-text-muted);
 }
 
@@ -171,14 +236,21 @@ body {
   color: var(--page-text-soft);
 }
 
+.header-field :where(label) {
+  color: var(--page-text-muted);
+}
+
+.header-input {
+  min-height: 2.25rem;
+  height: 2.25rem;
+}
+
 .loading-card,
 .empty-state {
-  border-color: rgb(119 138 98 / 0.18);
-  background:
-    linear-gradient(180deg, rgb(255 255 255 / 0.75), rgb(249 248 242 / 0.7)),
-    linear-gradient(120deg, rgb(91 199 176 / 0.04), transparent 40%, rgb(154 171 116 / 0.04));
+  border-color: var(--page-divider);
+  background: var(--page-empty-bg);
 }
 
 .error-panel {
-  background: rgb(140 42 42 / 0.08);
+  background: var(--page-error-bg);
 }

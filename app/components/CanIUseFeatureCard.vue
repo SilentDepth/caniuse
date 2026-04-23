@@ -55,9 +55,7 @@ defineProps<{
         </a>
       </div>
     </div>
-    <dl
-      class="feature-card-meta text-sm flex flex-col border-l border-l-[rgb(119_138_98_/_0.14)] divide-y divide-[rgb(119_138_98_/_0.14)]"
-    >
+    <dl class="feature-card-meta text-sm flex flex-col border-l">
       <div class="p-4">
         <dt class="feature-label text-xs uppercase tracking-[0.18em]">Baseline low date</dt>
         <dd class="feature-date mt-2 font-semibold">

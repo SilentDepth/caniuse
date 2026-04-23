@@ -27,7 +27,7 @@ useSeoMeta({
 
 <template>
   <UApp>
-    <div class="app-shell min-h-dvh antialiased">
+    <div class="app-shell isolate min-h-dvh antialiased">
       <CanIUseHeader v-model="eligibilityMonths" />
 
       <main class="pb-12">
