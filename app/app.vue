@@ -27,7 +27,7 @@ useSeoMeta({
 
 <template>
   <UApp>
-    <div class="min-h-screen bg-default text-default">
+    <div class="app-shell min-h-dvh antialiased">
       <CanIUseHeader v-model="eligibilityMonths" />
 
       <main class="pb-12">
@@ -40,12 +40,12 @@ useSeoMeta({
           <div
             v-for="index in 6"
             :key="index"
-            class="h-40 animate-pulse rounded-2xl border border-muted bg-elevated"
+            class="loading-card h-40 animate-pulse rounded-2xl border"
           />
         </section>
 
         <section v-else-if="errorMessage" class="mx-auto mt-8 max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div class="rounded-2xl border border-error/30 bg-error/10 p-5 text-sm">
+          <div class="error-panel rounded-2xl border border-error/30 p-5 text-sm">
             <p class="font-semibold text-error">Failed to load dataset.</p>
             <pre class="mt-3 whitespace-pre-wrap break-all font-mono text-xs text-error">{{
               errorMessage

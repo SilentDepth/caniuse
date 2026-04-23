@@ -21,26 +21,24 @@ defineProps<{
 </script>
 
 <template>
-  <article
-    class="grid gap-4 rounded-2xl border border-muted bg-elevated shadow-xs lg:grid-cols-[2fr_1fr]"
-  >
-    <div class="p-4 space-y-4">
+  <article class="feature-card grid gap-4 rounded-2xl border lg:grid-cols-[2fr_1fr]">
+    <div class="feature-card-body p-4 space-y-4">
       <div class="flex flex-wrap items-center gap-2">
         <span
-          class="rounded-full px-2.5 py-1 text-xs font-medium"
-          :class="tab.id === 'recent' ? 'bg-primary/10 text-primary' : 'bg-warning/10 text-warning'"
+          class="feature-badge rounded-full px-2.5 py-1 text-xs font-medium"
+          :class="tab.id === 'recent' ? 'feature-badge--recent' : 'feature-badge--upcoming'"
         >
           {{ tab.label }}
         </span>
-        <h3 class="text-xl font-semibold text-highlighted">
+        <h3 class="feature-title text-xl font-semibold">
           {{ feature.name }}
         </h3>
-        <code class="rounded-full border border-muted bg-default px-2.5 py-1 text-xs text-toned">
+        <code class="feature-code rounded-full border px-2.5 py-1 text-xs">
           {{ feature.id }}
         </code>
       </div>
 
-      <p v-if="feature.description" class="max-w-4xl text-sm leading-6 text-default">
+      <p v-if="feature.description" class="feature-description max-w-4xl text-sm leading-6">
         {{ feature.description }}
       </p>
 
@@ -51,35 +49,37 @@ defineProps<{
           :href="url"
           target="_blank"
           rel="noreferrer"
-          class="text-primary hover:underline"
+          class="feature-link hover:underline"
         >
           {{ formatSpecHostname(url) }}
         </a>
       </div>
     </div>
-    <dl class="text-sm flex flex-col border-l border-muted divide-y divide-muted">
+    <dl
+      class="feature-card-meta text-sm flex flex-col border-l border-l-[rgb(119_138_98_/_0.14)] divide-y divide-[rgb(119_138_98_/_0.14)]"
+    >
       <div class="p-4">
-        <dt class="text-xs uppercase tracking-[0.18em] text-muted">Baseline low date</dt>
-        <dd class="mt-2 font-semibold text-highlighted">
+        <dt class="feature-label text-xs uppercase tracking-[0.18em]">Baseline low date</dt>
+        <dd class="feature-date mt-2 font-semibold">
           {{ feature.baselineLowDate }}
         </dd>
       </div>
       <div class="p-4">
-        <dt class="text-xs uppercase tracking-[0.18em] text-muted">Available at</dt>
-        <dd class="mt-2 font-semibold text-highlighted">
+        <dt class="feature-label text-xs uppercase tracking-[0.18em]">Available at</dt>
+        <dd class="feature-date mt-2 font-semibold">
           {{ feature.availableAt }}
         </dd>
       </div>
       <div class="p-4">
-        <dt class="text-xs uppercase tracking-[0.18em] text-muted">Support versions</dt>
+        <dt class="feature-label text-xs uppercase tracking-[0.18em]">Support versions</dt>
         <dd
-          class="mt-3 grid gap-4"
+          class="feature-support mt-3 grid gap-4"
           :style="{ gridTemplateColumns: `repeat(${CORE_BROWSERS.length}, 1fr)` }"
         >
           <span
             v-for="browser in CORE_BROWSERS"
             :key="browser"
-            class="inline-flex items-center gap-[0.5em] text-default"
+            class="inline-flex items-center gap-[0.5em]"
           >
             <UIcon :name="browserIcons[browser]" class="size-5 shrink-0" />
             <span>

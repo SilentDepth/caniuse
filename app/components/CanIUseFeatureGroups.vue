@@ -12,10 +12,10 @@ defineProps<{
     <div v-if="groups.length" class="space-y-8">
       <section v-for="group in groups" :key="group.monthKey" class="space-y-4">
         <div class="flex items-center gap-3">
-          <h2 class="text-lg font-semibold text-highlighted">
+          <h2 class="page-heading text-lg font-semibold">
             {{ group.monthLabel }}
           </h2>
-          <span class="rounded-full border border-muted bg-elevated px-2.5 py-1 text-xs text-toned">
+          <span class="feature-group-count rounded-full border px-2.5 py-1 text-xs">
             {{ group.items.length }}
             {{ group.items.length === 1 ? 'feature' : 'features' }}
           </span>
@@ -32,7 +32,7 @@ defineProps<{
 
     <div
       v-else
-      class="rounded-2xl border border-dashed border-muted bg-elevated px-6 py-12 text-sm text-toned"
+      class="empty-state rounded-2xl border border-dashed px-6 py-12 text-sm text-[var(--page-text-muted)]"
     >
       {{ tab.emptyText }}
     </div>

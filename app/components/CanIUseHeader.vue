@@ -18,14 +18,14 @@ function handleUpdate(value: number | null) {
 </script>
 
 <template>
-  <header class="border-b border-muted bg-default/90 backdrop-blur">
+  <header class="page-header border-b">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-4">
       <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div class="space-y-2">
-          <h1 class="text-2xl font-light tracking-tight text-highlighted sm:text-3xl">
+          <h1 class="page-heading text-2xl font-light tracking-tight sm:text-3xl">
             Newly Eligible Web Features
           </h1>
-          <p class="max-w-3xl text-sm leading-6 text-muted">
+          <p class="page-subtitle max-w-3xl text-sm leading-6">
             Web-platform capabilities whose baseline low date makes them newly eligible in a
             {{ modelValue }}-month rollout window.
           </p>
