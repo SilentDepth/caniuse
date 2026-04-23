@@ -14,7 +14,7 @@ const { activeGroups, activeTab, eligibilityMonths, errorMessage, selectedTab, s
 
 const description = computed(
   () =>
-    `Track web platform features that become eligible within the ${eligibilityMonths.value}-month window, grouped into recent and upcoming milestones.`,
+    `Track web platform features that cross the full-support threshold after a ${eligibilityMonths.value}-month lag from baseline low date, grouped into recent and upcoming milestones.`,
 )
 
 useSeoMeta({
