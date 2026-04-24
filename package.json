@@ -8,8 +8,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "typecheck": "nuxt typecheck",
-    "prepare": "vp config"
+    "typecheck": "nuxt typecheck"
   },
   "dependencies": {
     "@nuxt/a11y": "1.0.0-alpha.1",
@@ -24,9 +23,8 @@
   "devDependencies": {
     "@iconify-json/logos": "^1.2.11",
     "@iconify-json/mingcute": "^1.2.7",
-    "rolldown": "1.0.0-rc.16",
+    "@nuxt/eslint": "^1.15.2",
     "typescript": "^6.0.2",
-    "vite-plus": "catalog:",
     "vue-tsc": "^3.2.6"
   },
   "packageManager": "pnpm@10.33.0"

@@ -62,10 +62,10 @@
 - Vue 3 + `<script setup>`
 - @nuxt/ui
 - Tailwind CSS 4
+- @nuxt/eslint
 - @vueuse/nuxt
 - @nuxt/a11y
 - @nuxt/hints
-- Vite+ (`vp`) 作为统一开发工具链
 
 ## 项目结构
 
@@ -91,27 +91,27 @@ app/
 先安装依赖：
 
 ```bash
-vp install
+pnpm install
 ```
 
 启动开发环境：
 
 ```bash
-vp dev
+pnpm dev
 ```
 
 常用命令：
 
 ```bash
-vp check   # 格式、Lint、类型检查
-vp test    # 运行测试
-vp build   # 生产构建
-vp preview # 本地预览生产构建
+pnpm run lint      # Lint
+pnpm run typecheck # 类型检查
+pnpm run build     # 生产构建
+pnpm run preview   # 本地预览生产构建
 ```
 
 注意：
 
-- 这个项目使用 `vp` 作为统一工具链，不要直接使用 `pnpm`、`npm` 或 `yarn` 执行常规开发命令。
+- 这个项目使用 `pnpm` 管理依赖和运行脚本。
 - 数据依赖外部 CDN；如果两个数据源都不可用，页面会显示加载错误。
 
 ## 界面行为概览

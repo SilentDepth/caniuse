@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     preference: 'system',
   },
 
-  modules: ['@nuxt/ui', '@nuxt/hints', '@nuxt/a11y', '@vueuse/nuxt'],
+  modules: ['@nuxt/ui', '@nuxt/hints', '@nuxt/a11y', '@nuxt/eslint', '@vueuse/nuxt'],
 
   css: ['~/assets/css/main.css'],
 
@@ -32,6 +32,14 @@ export default defineNuxtConfig({
           },
         },
       },
+    },
+  },
+
+  nitro: {
+    preset: 'cloudflare_module',
+    cloudflare: {
+      deployConfig: true,
+      nodeCompat: true,
     },
   },
 })

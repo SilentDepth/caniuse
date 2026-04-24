@@ -47,9 +47,9 @@ useSeoMeta({
       <main class="relative pb-12">
         <CanIUseTabNav
           ref="tabNav"
+          v-model:search-value="searchKeyword"
           :model-value="selectedTab"
           :search-active="isSearchMode"
-          v-model:search-value="searchKeyword"
           :items="tabItems"
           @update:model-value="selectTab"
           @search-focus="activateSearch"

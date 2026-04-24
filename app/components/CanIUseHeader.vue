@@ -32,7 +32,7 @@ const themeMenuItems = computed(() =>
   themeOptions.map(option => ({
     label: option.label,
     icon: option.icon,
-    color: colorMode.preference === option.value ? 'primary' : 'neutral',
+    color: colorMode.preference === option.value ? ('primary' as const) : ('neutral' as const),
     onSelect: () => {
       colorMode.preference = option.value
     },
