@@ -31,7 +31,9 @@ const isAvailable = computed(() => {
   >
     <div class="min-w-0 space-y-4 lg:pr-3">
       <div class="flex flex-wrap items-center gap-2">
-        <h3 class="min-w-0 text-xl font-semibold tracking-tight wrap-break-word text-(--page-text) text-balance">
+        <h3
+          class="min-w-0 text-xl font-semibold tracking-tight wrap-break-word text-(--page-text) text-balance"
+        >
           {{ feature.name }}
         </h3>
         <code
@@ -69,17 +71,13 @@ const isAvailable = computed(() => {
       class="mt-5 grid gap-4 border-t border-(--page-divider-soft) pt-4 text-base/7 sm:text-sm/6 lg:contents"
     >
       <div>
-        <dt>
-          Baseline low date
-        </dt>
+        <dt>Baseline low date</dt>
         <dd class="mt-1 font-semibold text-(--page-text) sm:mt-2">
           {{ feature.baselineLowDate || 'Not available' }}
         </dd>
       </div>
       <div>
-        <dt>
-          Available at
-        </dt>
+        <dt>Available at</dt>
         <dd class="mt-1 font-semibold text-(--page-text) sm:mt-2">
           <span class="inline-flex items-center gap-1.5">
             <UIcon
@@ -93,9 +91,7 @@ const isAvailable = computed(() => {
         </dd>
       </div>
       <div>
-        <dt>
-          Support versions
-        </dt>
+        <dt>Support versions</dt>
         <dd
           class="mt-2 grid grid-cols-[repeat(var(--browser-count),minmax(0,1fr))] gap-3 text-(--page-text-soft) sm:gap-4"
           :style="{ '--browser-count': CORE_BROWSERS.length }"
