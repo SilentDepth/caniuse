@@ -54,8 +54,8 @@ defineExpose({
         class="min-w-0 flex-1"
         :ui="{
           root: 'block',
-          list: 'gap-5 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
-          indicator: searchActive ? 'hidden' : '',
+          list: 'px-0 gap-5 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+          indicator: searchActive ? 'hidden' : 'bottom-0 h-0.5',
           trigger:
             'shrink-0 px-0 py-2 text-base text-[var(--page-text-muted)] transition-colors sm:text-sm data-[state=active]:text-[var(--page-text)]',
         }"
