@@ -41,9 +41,9 @@ defineExpose({
 
 <template>
   <div
-    class="px-4 sm:px-6 lg:px-8 sticky top-0 z-10 border-b border-(--page-divider-soft) bg-(--page-tabs-bg) shadow-[inset_0_1px_0_rgb(255_255_255/0.45)] dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.02)] backdrop-blur-lg"
+    class="sticky top-0 z-10 border-b border-(--page-divider-soft) bg-(--page-tabs-bg) px-4 shadow-[inset_0_1px_0_rgb(255_255_255/0.45)] backdrop-blur-lg sm:px-6 lg:px-8 dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.02)]"
   >
-    <div class="max-w-6xl mx-auto flex flex-col gap-2 py-2 sm:flex-row sm:items-center sm:py-0">
+    <div class="mx-auto flex max-w-6xl flex-col gap-2 py-2 sm:flex-row sm:items-center sm:py-0">
       <UTabs
         :model-value="searchActive ? undefined : modelValue"
         :items="items"
@@ -54,10 +54,10 @@ defineExpose({
         class="min-w-0 flex-1"
         :ui="{
           root: 'block',
-          list: 'gap-4',
+          list: 'gap-5 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
           indicator: searchActive ? 'hidden' : '',
           trigger:
-            'px-0 py-2 text-sm text-[var(--page-text-muted)] transition-colors data-[state=active]:text-[var(--page-text)]',
+            'shrink-0 px-0 py-2 text-base text-[var(--page-text-muted)] transition-colors sm:text-sm data-[state=active]:text-[var(--page-text)]',
         }"
         @update:model-value="value => emit('update:modelValue', value as FeatureTabId)"
       />
@@ -71,7 +71,7 @@ defineExpose({
         variant="outline"
         :highlight="searchActive"
         class="w-full sm:w-72"
-        :ui="{ base: 'text-sm' }"
+        :ui="{ base: 'text-base sm:text-sm' }"
         @focus="emit('search-focus')"
         @keydown.esc.stop.prevent="emit('search-escape')"
       />

@@ -42,60 +42,69 @@ const themeMenuItems = computed(() =>
 
 <template>
   <header
-    class="p-4 sm:px-6 lg:px-8 border-b border-(--page-divider) bg-(--page-header-bg) backdrop-blur-lg"
+    class="border-b border-(--page-divider) bg-(--page-header-bg) px-4 py-4 backdrop-blur-lg sm:px-6 sm:py-5 lg:px-8"
   >
-    <div class="max-w-6xl mx-auto flex justify-end">
-      <ClientOnly>
-        <UDropdownMenu
-          :items="themeMenuItems"
-          :content="{ align: 'end' }"
-          :ui="{ content: 'min-w-36' }"
+    <div class="mx-auto max-w-6xl space-y-3">
+      <div class="flex items-start justify-between gap-4">
+        <h1
+          class="max-w-[26ch] text-2xl font-light capitalize tracking-tight text-(--page-text) text-balance sm:text-3xl"
         >
-          <UButton
-            :icon="selectedTheme.icon"
-            :aria-label="`Color scheme: ${selectedTheme.label}`"
-            color="neutral"
-            variant="ghost"
-            size="sm"
-          />
-        </UDropdownMenu>
+          Can I use this yet?
+        </h1>
+        <ClientOnly>
+          <UDropdownMenu
+            :items="themeMenuItems"
+            :content="{ align: 'end' }"
+            :ui="{ content: 'min-w-36' }"
+          >
+            <UButton
+              :icon="selectedTheme.icon"
+              :aria-label="`Color scheme: ${selectedTheme.label}`"
+              color="neutral"
+              variant="ghost"
+              size="sm"
+              class="relative shrink-0"
+            >
+              <span
+                class="pointer-fine:hidden absolute top-1/2 left-1/2 size-[max(100%,3rem)] -translate-1/2"
+                aria-hidden="true"
+              />
+            </UButton>
+          </UDropdownMenu>
 
-        <template #fallback>
-          <UButton
-            icon="mingcute:computer-line"
-            aria-label="Color scheme: Auto"
-            color="neutral"
-            variant="ghost"
-            size="sm"
-            disabled
-          />
-        </template>
-      </ClientOnly>
-    </div>
-    <div class="max-w-6xl mx-auto space-y-2">
-      <h1
-        class="max-w-[26ch] text-2xl font-light capitalize tracking-tight text-(--page-text) text-balance sm:text-3xl"
-      >
-        Can I use this yet?
-      </h1>
+          <template #fallback>
+            <UButton
+              icon="mingcute:computer-line"
+              aria-label="Color scheme: Auto"
+              color="neutral"
+              variant="ghost"
+              size="sm"
+              class="shrink-0"
+              disabled
+            />
+          </template>
+        </ClientOnly>
+      </div>
       <div
-        class="flex flex-wrap items-center gap-x-2 gap-y-2 text-pretty text-base/7 text-(--page-text-muted) sm:text-sm/6"
+        class="flex flex-col gap-2 text-pretty text-base/7 text-(--page-text-muted) sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2 sm:gap-y-2 sm:text-sm/6"
       >
-        <span>Features become eligible after</span>
-        <UInputNumber
-          name="eligibility-months"
-          :model-value="props.modelValue"
-          :min="1"
-          :max="120"
-          :step="1"
-          :default-value="DEFAULT_ELIGIBILITY_MONTHS"
-          size="sm"
-          class="w-24 shrink-0"
-          :ui="{ base: 'tabular-nums max-sm:text-base' }"
-          aria-label="Safety window in months"
-          @update:model-value="handleUpdate"
-        />
-        <span class="font-medium text-(--page-text)">months</span>
+        <span class="inline-flex items-center gap-2">
+          <span>Eligible after</span>
+          <UInputNumber
+            name="eligibility-months"
+            :model-value="props.modelValue"
+            :min="1"
+            :max="120"
+            :step="1"
+            :default-value="DEFAULT_ELIGIBILITY_MONTHS"
+            size="sm"
+            class="w-24 shrink-0"
+            :ui="{ base: 'tabular-nums max-sm:text-base' }"
+            aria-label="Safety window in months"
+            @update:model-value="handleUpdate"
+          />
+          <span class="font-medium text-(--page-text)">months</span>
+        </span>
         <span>of full support across Chrome, Edge, Firefox, and Safari.</span>
       </div>
     </div>

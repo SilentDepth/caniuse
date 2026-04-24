@@ -26,74 +26,84 @@ const isAvailable = computed(() => {
 </script>
 
 <template>
-  <article class="p-4 bg-(--page-card-bg) border border-(--page-divider-soft)">
-    <div class="space-y-4">
+  <article
+    class="rounded-xl border border-(--page-divider-soft) bg-(--page-card-bg) p-4 lg:rounded-none"
+  >
+    <div class="min-w-0 space-y-4 lg:pr-3">
       <div class="flex flex-wrap items-center gap-2">
-        <h3 class="text-xl font-semibold text-(--page-text)">
+        <h3 class="min-w-0 text-xl font-semibold tracking-tight break-words text-(--page-text) text-balance">
           {{ feature.name }}
         </h3>
         <code
-          class="rounded-full border border-(--page-divider-soft) bg-(--page-code-bg) px-2.5 py-1 text-xs text-(--page-text-muted)"
+          class="inline-flex max-w-full rounded-full border border-(--page-divider-soft) bg-(--page-code-bg) px-2.5 py-1 font-mono text-[0.8125rem] break-all text-(--page-text-muted) sm:text-xs"
         >
           {{ feature.id }}
         </code>
       </div>
-      <p v-if="feature.description" class="max-w-4xl text-sm/6 text-(--page-text-soft)">
+      <p
+        v-if="feature.description"
+        class="max-w-4xl text-base/7 text-pretty text-(--page-text-soft) sm:text-sm/6"
+      >
         {{ feature.description }}
       </p>
-      <div v-if="feature.spec.length" class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+      <div
+        v-if="feature.spec.length"
+        class="flex flex-wrap gap-x-4 gap-y-2 text-base/7 sm:text-sm/6"
+      >
         <a
           v-for="url in feature.spec.slice(0, 3)"
           :key="url"
           :href="url"
           target="_blank"
           rel="noreferrer"
-          class="text-(--page-link) hover:text-(--page-link-hover) hover:underline underline-offset-2 flex items-center"
+          class="flex min-w-0 items-center text-(--page-link) underline-offset-2 hover:text-(--page-link-hover) hover:underline"
         >
-          <span>
+          <span class="truncate">
             {{ formatSpecHostname(url) }}
           </span>
-          <UIcon name="mingcute:arrow-right-up-line" class="size-4" />
+          <UIcon name="mingcute:arrow-right-up-line" class="size-5 shrink-0 sm:size-4" />
         </a>
       </div>
     </div>
-    <dl class="contents text-sm">
-      <div class="">
+    <dl
+      class="mt-5 grid gap-4 border-t border-(--page-divider-soft) pt-4 text-base/7 sm:text-sm/6 lg:contents"
+    >
+      <div>
         <dt
-          class="text-xs uppercase tracking-wide text-[color-mix(in_srgb,var(--color-olive-600)_72%,white)]"
+          class="text-[0.8125rem] font-medium text-[color-mix(in_srgb,var(--color-olive-600)_72%,white)] sm:text-xs"
         >
           Baseline low date
         </dt>
-        <dd class="mt-2 font-semibold text-(--page-text)">
+        <dd class="mt-1 font-semibold text-(--page-text) sm:mt-2">
           {{ feature.baselineLowDate || 'Not available' }}
         </dd>
       </div>
-      <div class="">
+      <div>
         <dt
-          class="text-xs uppercase tracking-wide text-[color-mix(in_srgb,var(--color-olive-600)_72%,white)]"
+          class="text-[0.8125rem] font-medium text-[color-mix(in_srgb,var(--color-olive-600)_72%,white)] sm:text-xs"
         >
           Available at
         </dt>
-        <dd class="mt-2 font-semibold text-(--page-text)">
+        <dd class="mt-1 font-semibold text-(--page-text) sm:mt-2">
           <span class="inline-flex items-center gap-1.5">
             <UIcon
               v-if="showAvailableAtStatus"
               :name="isAvailable ? 'mingcute:check-circle-fill' : 'mingcute:time-line'"
-              class="size-4"
+              class="size-5 sm:size-4"
               :class="isAvailable ? 'text-success' : 'text-warning'"
             />
             <span>{{ feature.availableAt || 'Not available' }}</span>
           </span>
         </dd>
       </div>
-      <div class="">
+      <div>
         <dt
-          class="text-xs uppercase tracking-wide text-[color-mix(in_srgb,var(--color-olive-600)_72%,white)]"
+          class="text-[0.8125rem] font-medium text-[color-mix(in_srgb,var(--color-olive-600)_72%,white)] sm:text-xs"
         >
           Support versions
         </dt>
         <dd
-          class="mt-2 grid gap-4 text-(--page-text-soft) grid-cols-[repeat(var(--browser-count),minmax(0,1fr))]"
+          class="mt-2 grid grid-cols-[repeat(var(--browser-count),minmax(0,1fr))] gap-3 text-(--page-text-soft) sm:gap-4"
           :style="{ '--browser-count': CORE_BROWSERS.length }"
         >
           <span
@@ -101,8 +111,8 @@ const isAvailable = computed(() => {
             :key="browser"
             class="inline-flex flex-col items-center"
           >
-            <UIcon :name="browserIcons[browser]" class="size-6" />
-            <span class="mt-[0.25em]">
+            <UIcon :name="browserIcons[browser]" class="size-7 sm:size-6" />
+            <span class="mt-[0.25em] tabular-nums">
               {{ feature.support[browser] ?? '—' }}
             </span>
           </span>
