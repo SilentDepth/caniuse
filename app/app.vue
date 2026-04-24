@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const title = 'Can I Use'
-
 useHead({
   meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
   link: [{ rel: 'icon', href: '/favicon.ico' }],
@@ -31,16 +29,14 @@ const {
   selectTab,
 } = useCanIUseFeatureSearch(allFeatures, selectedTab)
 
-const description = computed(
-  () =>
-    `Features are listed when they become safe to adopt, after ${eligibilityMonths.value} months of full support across Chrome, Edge, Firefox, and Safari.`,
-)
-
+const title = 'Can I use this yet?'
+const description =
+  'Check when features are safe to adopt after full support across Chrome, Edge, Firefox, and Safari.'
 useSeoMeta({
   title,
-  description: () => description.value,
+  description,
   ogTitle: title,
-  ogDescription: () => description.value,
+  ogDescription: description,
 })
 </script>
 
