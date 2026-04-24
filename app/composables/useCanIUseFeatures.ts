@@ -127,6 +127,55 @@ async function fetchWebFeatures(): Promise<WebFeaturesDataset> {
   throw lastError ?? new Error('Failed to fetch web features data')
 }
 
+function toFeatureRecord(
+  id: string,
+  feature: WebFeature,
+  eligibilityMonths: number,
+): FeatureRecord | null {
+  if (feature.kind && feature.kind !== 'feature') return null
+
+  const baselineLowDate = feature.status?.baseline_low_date
+  const baselineLowMoment = baselineLowDate ? parseUtcDate(baselineLowDate) : null
+
+  const availableAtMoment = baselineLowMoment
+    ? addMonthsUtc(baselineLowMoment, eligibilityMonths)
+    : null
+
+  return {
+    id,
+    name: feature.name || id,
+    description: feature.description,
+    spec: feature.spec ?? [],
+    baselineLowDate: baselineLowDate ?? '',
+    availableAt: availableAtMoment ? formatIsoDate(availableAtMoment) : '',
+    support: Object.fromEntries(
+      CORE_BROWSERS.map(browser => [browser, feature.status?.support?.[browser]]),
+    ) as Partial<Record<CoreBrowser, string>>,
+  }
+}
+
+function compareFeatureAvailability(a: FeatureRecord, b: FeatureRecord) {
+  if (!a.availableAt && !b.availableAt) return 0
+  if (!a.availableAt) return 1
+  if (!b.availableAt) return -1
+
+  return a.availableAt.localeCompare(b.availableAt)
+}
+
+function toAllFeatureRecords(dataset: WebFeaturesDataset | undefined, eligibilityMonths: number) {
+  return Object.entries(dataset?.features ?? {})
+    .flatMap(([id, feature]): FeatureRecord[] => {
+      const record = toFeatureRecord(id, feature, eligibilityMonths)
+      return record ? [record] : []
+    })
+    .sort(
+      (a, b) =>
+        compareFeatureAvailability(a, b) ||
+        a.name.localeCompare(b.name) ||
+        a.id.localeCompare(b.id),
+    )
+}
+
 function toFeatureRecords(
   dataset: WebFeaturesDataset | undefined,
   tabId: FeatureTabId,
@@ -138,37 +187,17 @@ function toFeatureRecords(
   const windowEnd = tabId === 'recent' ? currentMonthStart : upcomingEnd
   const sortDirection = tabId === 'recent' ? -1 : 1
 
-  return Object.entries(dataset?.features ?? {})
-    .flatMap(([id, feature]): FeatureRecord[] => {
-      if (feature.kind !== 'feature') return []
+  return toAllFeatureRecords(dataset, eligibilityMonths)
+    .filter(item => {
+      if (!item.availableAt) return false
 
-      const baselineLowDate = feature.status?.baseline_low_date
-      if (!baselineLowDate) return []
+      const availableAtMoment = parseUtcDate(item.availableAt)
+      if (!availableAtMoment) return false
 
-      const baselineLowMoment = parseUtcDate(baselineLowDate)
-      if (!baselineLowMoment) return []
-
-      const availableAtMoment = addMonthsUtc(baselineLowMoment, eligibilityMonths)
-      if (
-        availableAtMoment.getTime() < windowStart.getTime() ||
-        availableAtMoment.getTime() >= windowEnd.getTime()
-      ) {
-        return []
-      }
-
-      return [
-        {
-          id,
-          name: feature.name || id,
-          description: feature.description,
-          spec: feature.spec ?? [],
-          baselineLowDate,
-          availableAt: formatIsoDate(availableAtMoment),
-          support: Object.fromEntries(
-            CORE_BROWSERS.map(browser => [browser, feature.status?.support?.[browser]]),
-          ) as Partial<Record<CoreBrowser, string>>,
-        },
-      ]
+      return (
+        availableAtMoment.getTime() >= windowStart.getTime() &&
+        availableAtMoment.getTime() < windowEnd.getTime()
+      )
     })
     .sort((a, b) => {
       const aDate = parseUtcDate(a.availableAt)?.getTime() ?? 0
@@ -264,6 +293,9 @@ export async function useCanIUseFeatures() {
   )
 
   const activeGroups = computed(() => groupsByTab.value[selectedTab.value])
+  const allFeatures = computed(() =>
+    toAllFeatureRecords(data.value?.dataset, eligibilityMonths.value),
+  )
 
   const errorMessage = computed(() => {
     const cause = error.value
@@ -280,6 +312,7 @@ export async function useCanIUseFeatures() {
   return {
     activeGroups,
     activeTab,
+    allFeatures,
     errorMessage,
     eligibilityMonths,
     selectedTab,

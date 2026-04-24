@@ -5,8 +5,9 @@ import {
   type FeatureRecord,
 } from '@/composables/useCanIUseFeatures'
 
-defineProps<{
+const props = defineProps<{
   feature: FeatureRecord
+  showAvailableAtStatus?: boolean
 }>()
 
 const browserIcons: Record<CoreBrowser, string> = {
@@ -15,6 +16,13 @@ const browserIcons: Record<CoreBrowser, string> = {
   firefox: 'logos:firefox',
   safari: 'logos:safari',
 }
+
+const isAvailable = computed(() => {
+  if (!props.feature.availableAt) return false
+
+  const availableAtTime = new Date(`${props.feature.availableAt}T00:00:00.000Z`).getTime()
+  return Number.isFinite(availableAtTime) && availableAtTime <= Date.now()
+})
 </script>
 
 <template>
@@ -57,7 +65,7 @@ const browserIcons: Record<CoreBrowser, string> = {
           Baseline low date
         </dt>
         <dd class="mt-2 font-semibold text-(--page-text)">
-          {{ feature.baselineLowDate }}
+          {{ feature.baselineLowDate || 'Not available' }}
         </dd>
       </div>
       <div class="">
@@ -67,7 +75,15 @@ const browserIcons: Record<CoreBrowser, string> = {
           Available at
         </dt>
         <dd class="mt-2 font-semibold text-(--page-text)">
-          {{ feature.availableAt }}
+          <span class="inline-flex items-center gap-1.5">
+            <UIcon
+              v-if="showAvailableAtStatus"
+              :name="isAvailable ? 'mingcute:check-circle-fill' : 'mingcute:time-line'"
+              class="size-4"
+              :class="isAvailable ? 'text-success' : 'text-warning'"
+            />
+            <span>{{ feature.availableAt || 'Not available' }}</span>
+          </span>
         </dd>
       </div>
       <div class="">
