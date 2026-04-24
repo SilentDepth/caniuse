@@ -13,4 +13,25 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui', '@nuxt/hints', '@nuxt/a11y', '@vueuse/nuxt'],
 
   css: ['~/assets/css/main.css'],
+
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (
+              id.includes('/node_modules/') &&
+              (id.includes('/nuxt/') ||
+                id.includes('/vue/') ||
+                id.includes('/@vue/') ||
+                id.includes('/@vueuse/') ||
+                id.includes('/@unhead/'))
+            ) {
+              return 'framework'
+            }
+          },
+        },
+      },
+    },
+  },
 })
