@@ -2,7 +2,9 @@
 @import '@nuxt/ui';
 
 @theme static {
-  --font-sans: 'Public Sans', sans-serif;
+  --font-sans: 'Figtree', 'Noto Sans SC', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Figtree', 'Noto Sans SC', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   --color-green-50: #effdf5;
   --color-green-100: #d9fbe8;
@@ -72,4 +74,8 @@ html.dark {
 body {
   @apply antialiased;
   color: var(--page-text);
+}
+
+:where(h1, h2, h3) {
+  font-family: var(--font-display);
 }

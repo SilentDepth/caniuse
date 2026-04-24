@@ -15,6 +15,10 @@ export default defineNuxtConfig({
     preference: 'system',
   },
 
+  fonts: {
+    processCSSVariables: false,
+  },
+
   modules: ['@nuxt/ui', '@nuxt/hints', '@nuxt/a11y', '@nuxt/eslint', '@vueuse/nuxt'],
 
   css: ['~/assets/css/main.css'],

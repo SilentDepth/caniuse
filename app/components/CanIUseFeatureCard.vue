@@ -31,7 +31,7 @@ const isAvailable = computed(() => {
   >
     <div class="min-w-0 space-y-4 lg:pr-3">
       <div class="flex flex-wrap items-center gap-2">
-        <h3 class="min-w-0 text-xl font-semibold tracking-tight break-words text-(--page-text) text-balance">
+        <h3 class="min-w-0 text-xl font-semibold tracking-tight wrap-break-word text-(--page-text) text-balance">
           {{ feature.name }}
         </h3>
         <code
@@ -56,12 +56,12 @@ const isAvailable = computed(() => {
           :href="url"
           target="_blank"
           rel="noreferrer"
-          class="flex min-w-0 items-center text-(--page-link) underline-offset-2 hover:text-(--page-link-hover) hover:underline"
+          class="flex min-w-0 items-center text-(--page-link) underline-offset-1 hover:text-(--page-link-hover) hover:underline"
         >
           <span class="truncate">
             {{ formatSpecHostname(url) }}
           </span>
-          <UIcon name="mingcute:arrow-right-up-line" class="size-5 shrink-0 sm:size-4" />
+          <UIcon name="mingcute:arrow-right-up-line" class="flex-none size-4" />
         </a>
       </div>
     </div>
@@ -69,9 +69,7 @@ const isAvailable = computed(() => {
       class="mt-5 grid gap-4 border-t border-(--page-divider-soft) pt-4 text-base/7 sm:text-sm/6 lg:contents"
     >
       <div>
-        <dt
-          class="text-[0.8125rem] font-medium text-[color-mix(in_srgb,var(--color-olive-600)_72%,white)] sm:text-xs"
-        >
+        <dt>
           Baseline low date
         </dt>
         <dd class="mt-1 font-semibold text-(--page-text) sm:mt-2">
@@ -79,9 +77,7 @@ const isAvailable = computed(() => {
         </dd>
       </div>
       <div>
-        <dt
-          class="text-[0.8125rem] font-medium text-[color-mix(in_srgb,var(--color-olive-600)_72%,white)] sm:text-xs"
-        >
+        <dt>
           Available at
         </dt>
         <dd class="mt-1 font-semibold text-(--page-text) sm:mt-2">
@@ -97,9 +93,7 @@ const isAvailable = computed(() => {
         </dd>
       </div>
       <div>
-        <dt
-          class="text-[0.8125rem] font-medium text-[color-mix(in_srgb,var(--color-olive-600)_72%,white)] sm:text-xs"
-        >
+        <dt>
           Support versions
         </dt>
         <dd
@@ -121,3 +115,12 @@ const isAvailable = computed(() => {
     </dl>
   </article>
 </template>
+
+<style scoped>
+@reference 'tailwindcss';
+
+dt {
+  @apply font-medium text-[color-mix(in_srgb,var(--color-olive-600)_72%,white)] uppercase tracking-wide;
+  @apply text-[0.8125rem] sm:text-xs;
+}
+</style>
