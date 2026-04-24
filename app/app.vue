@@ -14,7 +14,7 @@ const { activeGroups, activeTab, eligibilityMonths, errorMessage, selectedTab, s
 
 const description = computed(
   () =>
-    `Track web platform features that cross the full-support threshold after a ${eligibilityMonths.value}-month lag from baseline low date, grouped into recent and upcoming milestones.`,
+    `Features are listed when they become safe to adopt, after ${eligibilityMonths.value} months of full support across Chrome, Edge, Firefox, and Safari.`,
 )
 
 useSeoMeta({

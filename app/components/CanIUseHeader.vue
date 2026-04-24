@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import {
+  DEFAULT_ELIGIBILITY_MONTHS,
+  sanitizeEligibilityMonths,
+} from '@/composables/useCanIUseFeatures'
+
 const props = defineProps<{
   modelValue: number
 }>()
@@ -7,32 +12,91 @@ const emit = defineEmits<{
   'update:modelValue': [value: number]
 }>()
 
-function handleControlsUpdate(value: number) {
-  emit('update:modelValue', value)
+const colorMode = useColorMode()
+
+function handleUpdate(value: number | null) {
+  emit('update:modelValue', sanitizeEligibilityMonths(value))
 }
+
+const themeOptions = [
+  { label: 'Auto', value: 'system', icon: 'mingcute:computer-line' },
+  { label: 'Light', value: 'light', icon: 'mingcute:sun-line' },
+  { label: 'Dark', value: 'dark', icon: 'mingcute:moon-stars-line' },
+] as const
+
+const selectedTheme = computed(
+  () => themeOptions.find(option => option.value === colorMode.preference) ?? themeOptions[0],
+)
+
+const themeMenuItems = computed(() =>
+  themeOptions.map(option => ({
+    label: option.label,
+    icon: option.icon,
+    color: colorMode.preference === option.value ? 'primary' : 'neutral',
+    onSelect: () => {
+      colorMode.preference = option.value
+    },
+  })),
+)
 </script>
 
 <template>
-  <header class="border-b border-(--page-divider) bg-(--page-header-bg) backdrop-blur-lg">
-    <div class="mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
-      <div class="grid gap-6 lg:grid-cols-[2fr_1fr] lg:items-end lg:gap-4">
-        <div class="space-y-2">
-          <h1
-            class="max-w-[26ch] text-2xl font-light tracking-tight text-(--page-text) text-balance sm:text-3xl"
-          >
-            When Web Features Become Safe to Count On
-          </h1>
-          <p class="max-w-[56ch] text-pretty text-sm/6 text-(--page-text-muted)">
-            This view tracks features that cross the full-support threshold after a
-            {{ props.modelValue }}-month adoption window across Chrome, Edge, Firefox, and Safari.
-          </p>
-        </div>
+  <header
+    class="p-4 sm:px-6 lg:px-8 border-b border-(--page-divider) bg-(--page-header-bg) backdrop-blur-lg"
+  >
+    <div class="max-w-6xl mx-auto flex justify-end">
+      <ClientOnly>
+        <UDropdownMenu
+          :items="themeMenuItems"
+          :content="{ align: 'end' }"
+          :ui="{ content: 'min-w-36' }"
+        >
+          <UButton
+            :icon="selectedTheme.icon"
+            :aria-label="`Color scheme: ${selectedTheme.label}`"
+            color="neutral"
+            variant="ghost"
+            size="sm"
+          />
+        </UDropdownMenu>
 
-        <CanIUseHeaderControls
+        <template #fallback>
+          <UButton
+            icon="mingcute:computer-line"
+            aria-label="Color scheme: Auto"
+            color="neutral"
+            variant="ghost"
+            size="sm"
+            disabled
+          />
+        </template>
+      </ClientOnly>
+    </div>
+    <div class="max-w-6xl mx-auto space-y-2">
+      <h1
+        class="max-w-[26ch] text-2xl font-light capitalize tracking-tight text-(--page-text) text-balance sm:text-3xl"
+      >
+        Can I use this yet?
+      </h1>
+      <div
+        class="flex flex-wrap items-center gap-x-2 gap-y-2 text-pretty text-base/7 text-(--page-text-muted) sm:text-sm/6"
+      >
+        <span>Features become eligible after</span>
+        <UInputNumber
+          name="eligibility-months"
           :model-value="props.modelValue"
-          window-label="Lag (months)"
-          @update:model-value="handleControlsUpdate"
+          :min="1"
+          :max="120"
+          :step="1"
+          :default-value="DEFAULT_ELIGIBILITY_MONTHS"
+          size="sm"
+          class="w-24 shrink-0"
+          :ui="{ base: 'tabular-nums max-sm:text-base' }"
+          aria-label="Safety window in months"
+          @update:model-value="handleUpdate"
         />
+        <span class="font-medium text-(--page-text)">months</span>
+        <span>of full support across Chrome, Edge, Firefox, and Safari.</span>
       </div>
     </div>
   </header>
