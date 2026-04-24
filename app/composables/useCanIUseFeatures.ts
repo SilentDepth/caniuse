@@ -1,10 +1,5 @@
 import { computed, ref } from 'vue'
 
-const DATASET_URLS = [
-  'https://unpkg.com/web-features@latest/data.json',
-  'https://cdn.jsdelivr.net/npm/web-features@latest/data.json',
-] as const
-
 export const CORE_BROWSERS = ['chrome', 'edge', 'firefox', 'safari'] as const
 export const DEFAULT_ELIGIBILITY_MONTHS = 30
 const WINDOW_MONTHS = 6
@@ -108,23 +103,7 @@ function getTrackingWindow(referenceMonthStart: Date) {
 }
 
 async function fetchWebFeatures(): Promise<WebFeaturesDataset> {
-  let lastError: unknown
-
-  for (const url of DATASET_URLS) {
-    try {
-      const response = await fetch(url)
-      if (!response.ok) {
-        lastError = new Error(`Failed to fetch ${url}: ${response.status}`)
-        continue
-      }
-
-      return (await response.json()) as WebFeaturesDataset
-    } catch (error) {
-      lastError = error
-    }
-  }
-
-  throw lastError ?? new Error('Failed to fetch web features data')
+  return await $fetch<WebFeaturesDataset>('/api/web-features')
 }
 
 function toFeatureRecord(

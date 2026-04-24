@@ -1,4 +1,9 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+const kvNamespaceId = import.meta.env.KV_NAMESPACE_ID
+
+if (import.meta.env.PROD && !kvNamespaceId) {
+  throw new Error('KV_NAMESPACE_ID is required to generate the Cloudflare KV binding.')
+}
+
 export default defineNuxtConfig({
   compatibilityDate: '2026-04-22',
 
@@ -37,9 +42,37 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'cloudflare_module',
+    experimental: {
+      tasks: true,
+    },
+    storage: {
+      kv: {
+        driver: 'cloudflare-kv-binding',
+        binding: 'KV',
+      },
+    },
+    devStorage: {
+      kv: {
+        driver: 'memory',
+      },
+    },
+    scheduledTasks: {
+      '0 0 * * *': ['web-features:update'],
+    },
     cloudflare: {
       deployConfig: true,
       nodeCompat: true,
+      wrangler: {
+        kv_namespaces: [
+          {
+            binding: 'KV',
+            id: kvNamespaceId,
+          },
+        ],
+        triggers: {
+          crons: ['0 0 * * *'],
+        },
+      },
     },
   },
 })
