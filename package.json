@@ -1,5 +1,5 @@
 {
-  "name": "silent-land-web-baseline",
+  "name": "@silent.land/caniuse",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,8 +12,6 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.102",
-    "@iconify-json/simple-icons": "^1.2.78",
     "@nuxt/a11y": "1.0.0-alpha.1",
     "@nuxt/hints": "1.0.3",
     "@nuxt/ui": "^4.6.1",
@@ -25,6 +23,7 @@
   },
   "devDependencies": {
     "@iconify-json/logos": "^1.2.11",
+    "@iconify-json/mingcute": "^1.2.7",
     "rolldown": "1.0.0-rc.16",
     "typescript": "^6.0.2",
     "vite-plus": "catalog:",
