@@ -67,6 +67,12 @@ export default defineNuxtConfig({
       deployConfig: true,
       nodeCompat: true,
       wrangler: {
+        observability: {
+          logs: {
+            enabled: true,
+            invocation_logs: true,
+          },
+        },
         kv_namespaces: [
           {
             binding: 'KV',
