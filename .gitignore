@@ -24,5 +24,6 @@ logs
 .env.*
 !.env.example
 
-# Codex local configs
+# Local agent configs
+.local
 .codex/environments
