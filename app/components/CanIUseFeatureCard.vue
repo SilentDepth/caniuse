@@ -63,7 +63,7 @@ const isAvailable = computed(() => {
           <span class="truncate">
             {{ formatSpecHostname(url) }}
           </span>
-          <UIcon name="mingcute:arrow-right-up-line" class="flex-none size-4" />
+          <UIcon name="i-mingcute-arrow-right-up-line" class="flex-none size-4" />
         </a>
       </div>
     </div>
@@ -82,7 +82,7 @@ const isAvailable = computed(() => {
           <span class="inline-flex items-center gap-1.5">
             <UIcon
               v-if="showAvailableAtStatus"
-              :name="isAvailable ? 'mingcute:check-circle-fill' : 'mingcute:time-line'"
+              :name="isAvailable ? 'i-mingcute-check-circle-fill' : 'i-mingcute-time-line'"
               class="size-5 sm:size-4"
               :class="isAvailable ? 'text-success' : 'text-warning'"
             />

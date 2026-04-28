@@ -66,7 +66,7 @@ defineExpose({
         v-model="searchModel"
         type="search"
         placeholder="Search features"
-        icon="mingcute:search-line"
+        icon="i-mingcute-search-line"
         color="primary"
         variant="outline"
         :highlight="searchActive"

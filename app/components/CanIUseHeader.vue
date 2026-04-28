@@ -19,9 +19,9 @@ function handleUpdate(value: number | null) {
 }
 
 const themeOptions = [
-  { label: 'Auto', value: 'system', icon: 'mingcute:computer-line' },
-  { label: 'Light', value: 'light', icon: 'mingcute:sun-line' },
-  { label: 'Dark', value: 'dark', icon: 'mingcute:moon-stars-line' },
+  { label: 'Auto', value: 'system', icon: 'i-mingcute-computer-line' },
+  { label: 'Light', value: 'light', icon: 'i-mingcute-sun-line' },
+  { label: 'Dark', value: 'dark', icon: 'i-mingcute-moon-stars-line' },
 ] as const
 
 const selectedTheme = computed(
@@ -62,19 +62,13 @@ const themeMenuItems = computed(() =>
               :aria-label="`Color scheme: ${selectedTheme.label}`"
               color="neutral"
               variant="ghost"
-              size="sm"
-              class="relative shrink-0"
-            >
-              <span
-                class="pointer-fine:hidden absolute top-1/2 left-1/2 size-[max(100%,3rem)] -translate-1/2"
-                aria-hidden="true"
-              />
-            </UButton>
+              size="md"
+            />
           </UDropdownMenu>
 
           <template #fallback>
             <UButton
-              icon="mingcute:computer-line"
+              icon="i-mingcute-computer-line"
               aria-label="Color scheme: Auto"
               color="neutral"
               variant="ghost"
