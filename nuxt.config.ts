@@ -21,6 +21,16 @@ export default defineNuxtConfig({
 
   modules: ['@nuxt/ui', '@nuxt/hints', '@nuxt/a11y', '@nuxt/eslint', '@vueuse/nuxt'],
 
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'en',
+      },
+      meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
+      link: [{ rel: 'icon', href: '/favicon.ico' }],
+    },
+  },
+
   css: ['~/assets/css/main.css'],
 
   vite: {

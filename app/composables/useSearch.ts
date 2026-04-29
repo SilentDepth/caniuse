@@ -1,7 +1,5 @@
-import { debounce } from 'es-toolkit'
-import { computed, nextTick, onBeforeUnmount, ref, watch, type Ref } from 'vue'
-
 import type { FeatureRecord, FeatureTabId } from '#shared/utils/caniuse-features'
+import { debounce } from 'es-toolkit'
 
 const SEARCH_RESULT_LIMIT = 20
 
@@ -31,7 +29,7 @@ function isEditableTarget(target: EventTarget | null) {
   return target.isContentEditable || target.matches('input, textarea, select, [role="textbox"]')
 }
 
-export function useCanIUseFeatureSearch(
+export function useSearch(
   features: Ref<FeatureRecord[]>,
   selectedTab: Ref<FeatureTabId>,
   isEnabled: Ref<boolean>,

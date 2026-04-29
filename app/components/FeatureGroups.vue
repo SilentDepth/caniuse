@@ -33,7 +33,7 @@ function getGroupHeading(group: FeatureGroup, tab: FeatureTab) {
               {{ group.items.length === 1 ? 'feature' : 'features' }}
             </span>
           </div>
-          <CanIUseFeatureCard
+          <FeatureCard
             v-for="feature in group.items"
             :key="feature.id"
             :feature="feature"

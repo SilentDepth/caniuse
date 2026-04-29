@@ -20,7 +20,7 @@ defineProps<{
         v-else-if="results.length"
         class="space-y-3 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_auto_auto] lg:gap-x-4 lg:space-y-0"
       >
-        <CanIUseFeatureCard
+        <FeatureCard
           v-for="feature in results"
           :key="feature.id"
           :feature="feature"

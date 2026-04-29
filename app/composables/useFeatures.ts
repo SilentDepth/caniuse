@@ -1,5 +1,3 @@
-import { computed, ref } from 'vue'
-
 import {
   DEFAULT_ELIGIBILITY_MONTHS,
   FEATURE_TABS,
@@ -36,7 +34,7 @@ async function fetchWindowWebFeatures(
   })
 }
 
-export function useCanIUseFeatures() {
+export function useFeatures() {
   const selectedTab = ref<FeatureTabId>('recent')
 
   const eligibilityMonthsRaw = useCookie<string>(ELIGIBILITY_MONTHS_COOKIE_KEY, {

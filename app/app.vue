@@ -1,20 +1,4 @@
 <script setup lang="ts">
-useHead({
-  meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
-  link: [
-    { rel: 'icon', href: '/favicon.ico' },
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-    {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap',
-    },
-  ],
-  htmlAttrs: {
-    lang: 'en',
-  },
-})
-
 const {
   activeGroups,
   activeTab,
@@ -27,7 +11,7 @@ const {
   selectedTab,
   status,
   tabItems,
-} = useCanIUseFeatures()
+} = useFeatures()
 
 const {
   activateSearch,
@@ -38,7 +22,7 @@ const {
   searchResults,
   searchTarget: tabNav,
   selectTab,
-} = useCanIUseFeatureSearch(allFeatures, selectedTab, isFullDatasetReady)
+} = useSearch(allFeatures, selectedTab, isFullDatasetReady)
 
 const searchPlaceholder = computed(() => {
   if (isFullDatasetReady.value) return 'Search features'
@@ -60,9 +44,9 @@ useSeoMeta({
 <template>
   <UApp>
     <div class="relative min-h-dvh font-sans">
-      <CanIUseHeader v-model="eligibilityMonths" :disabled="!isFullDatasetReady" />
+      <AppHeader v-model="eligibilityMonths" :disabled="!isFullDatasetReady" />
       <main class="relative pb-12">
-        <CanIUseTabNav
+        <AppNav
           ref="tabNav"
           v-model:search-value="searchKeyword"
           :model-value="selectedTab"
@@ -102,12 +86,12 @@ useSeoMeta({
               unavailable.
             </div>
           </section>
-          <LazyCanIUseSearchResults
+          <LazySearchResults
             v-if="isSearchMode"
             :query="debouncedSearchKeyword"
             :results="searchResults"
           />
-          <CanIUseFeatureGroups v-else :groups="activeGroups" :tab="activeTab" />
+          <FeatureGroups v-else :groups="activeGroups" :tab="activeTab" />
         </template>
       </main>
     </div>

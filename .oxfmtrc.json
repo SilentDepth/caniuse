@@ -1,7 +1,12 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": [],
+  "ignorePatterns": [".nuxt", ".output"],
   "semi": false,
   "singleQuote": true,
-  "arrowParens": "avoid"
+  "arrowParens": "avoid",
+  "sortImports": {
+    "groups": ["builtin", "side_effect", "external", ["parent", "sibling", "index"], "unknown"],
+    "newlinesBetween": false,
+    "partitionByNewline": false
+  }
 }
