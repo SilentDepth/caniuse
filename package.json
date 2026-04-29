@@ -20,15 +20,15 @@
     "@vueuse/nuxt": "14.2.1",
     "es-toolkit": "^1.46.0",
     "nuxt": "^4.4.2",
-    "tailwindcss": "^4.2.2"
+    "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
     "@iconify-json/logos": "^1.2.11",
     "@iconify-json/mingcute": "^1.2.7",
     "@nuxt/eslint": "^1.15.2",
     "oxfmt": "^0.46.0",
-    "typescript": "^6.0.2",
-    "vue-tsc": "^3.2.6",
+    "typescript": "^6.0.3",
+    "vue-tsc": "^3.2.7",
     "wrangler": "^4.85.0"
   },
   "packageManager": "pnpm@10.33.0"
