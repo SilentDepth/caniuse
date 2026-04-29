@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import {
-  CORE_BROWSERS,
-  type CoreBrowser,
-  type FeatureRecord,
-} from '@/composables/useCanIUseFeatures'
+import { CORE_BROWSERS, type CoreBrowser, type FeatureRecord } from '#shared/utils/caniuse-features'
 
 const props = defineProps<{
   feature: FeatureRecord

@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import type { FeatureTabId } from '@/composables/useCanIUseFeatures'
+import type { FeatureTabId } from '#shared/utils/caniuse-features'
 
 const props = defineProps<{
   items: Array<{
+    disabled?: boolean
     id: FeatureTabId
     label: string
   }>
   modelValue: FeatureTabId
   searchActive: boolean
+  searchDisabled?: boolean
+  searchPlaceholder?: string
   searchValue: string
 }>()
 
@@ -65,7 +68,8 @@ defineExpose({
         ref="searchInput"
         v-model="searchModel"
         type="search"
-        placeholder="Search features"
+        :placeholder="searchPlaceholder ?? 'Search features'"
+        :disabled="searchDisabled"
         icon="i-mingcute-search-line"
         color="primary"
         variant="outline"

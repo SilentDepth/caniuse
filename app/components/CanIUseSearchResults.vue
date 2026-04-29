@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FeatureRecord } from '@/composables/useCanIUseFeatures'
+import type { FeatureRecord } from '#shared/utils/caniuse-features'
 
 defineProps<{
   query: string

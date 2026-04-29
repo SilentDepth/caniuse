@@ -2,9 +2,10 @@
 import {
   DEFAULT_ELIGIBILITY_MONTHS,
   sanitizeEligibilityMonths,
-} from '@/composables/useCanIUseFeatures'
+} from '#shared/utils/caniuse-features'
 
 const props = defineProps<{
+  disabled?: boolean
   modelValue: number
 }>()
 
@@ -87,6 +88,7 @@ const themeMenuItems = computed(() =>
           <UInputNumber
             name="eligibility-months"
             :model-value="props.modelValue"
+            :disabled="props.disabled"
             :min="1"
             :max="120"
             :step="1"

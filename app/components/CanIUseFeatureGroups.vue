@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FeatureGroup, FeatureTab } from '@/composables/useCanIUseFeatures'
+import type { FeatureGroup, FeatureTab } from '#shared/utils/caniuse-features'
 
 defineProps<{
   groups: FeatureGroup[]

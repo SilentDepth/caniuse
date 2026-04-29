@@ -21,10 +21,13 @@ const {
   allFeatures,
   eligibilityMonths,
   errorMessage,
+  fullDatasetErrorMessage,
+  fullDatasetStatus,
+  isFullDatasetReady,
   selectedTab,
   status,
   tabItems,
-} = await useCanIUseFeatures()
+} = useCanIUseFeatures()
 
 const {
   activateSearch,
@@ -35,7 +38,13 @@ const {
   searchResults,
   searchTarget: tabNav,
   selectTab,
-} = useCanIUseFeatureSearch(allFeatures, selectedTab)
+} = useCanIUseFeatureSearch(allFeatures, selectedTab, isFullDatasetReady)
+
+const searchPlaceholder = computed(() => {
+  if (isFullDatasetReady.value) return 'Search features'
+  if (fullDatasetStatus.value === 'error') return 'Search unavailable'
+  return 'Loading search data...'
+})
 
 const title = 'Can I use this yet?'
 const description =
@@ -51,12 +60,14 @@ useSeoMeta({
 <template>
   <UApp>
     <div class="relative min-h-dvh font-sans">
-      <CanIUseHeader v-model="eligibilityMonths" />
+      <CanIUseHeader v-model="eligibilityMonths" :disabled="!isFullDatasetReady" />
       <main class="relative pb-12">
         <CanIUseTabNav
           ref="tabNav"
           v-model:search-value="searchKeyword"
           :model-value="selectedTab"
+          :search-disabled="!isFullDatasetReady"
+          :search-placeholder="searchPlaceholder"
           :search-active="isSearchMode"
           :items="tabItems"
           @update:model-value="selectTab"
@@ -81,12 +92,23 @@ useSeoMeta({
             }}</pre>
           </div>
         </section>
-        <LazyCanIUseSearchResults
-          v-else-if="isSearchMode"
-          :query="debouncedSearchKeyword"
-          :results="searchResults"
-        />
-        <CanIUseFeatureGroups v-else :groups="activeGroups" :tab="activeTab" />
+        <template v-else>
+          <section
+            v-if="fullDatasetErrorMessage"
+            class="mx-auto mt-4 max-w-6xl px-4 sm:px-6 lg:px-8"
+          >
+            <div class="rounded-xl border border-warning/30 bg-warning/10 p-4 text-sm text-warning">
+              Full dataset failed to load. Search, upcoming features, and safety window changes are
+              unavailable.
+            </div>
+          </section>
+          <LazyCanIUseSearchResults
+            v-if="isSearchMode"
+            :query="debouncedSearchKeyword"
+            :results="searchResults"
+          />
+          <CanIUseFeatureGroups v-else :groups="activeGroups" :tab="activeTab" />
+        </template>
       </main>
     </div>
   </UApp>

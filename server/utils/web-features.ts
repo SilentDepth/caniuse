@@ -1,24 +1,11 @@
+import type { WebFeaturesDataset } from '#shared/utils/caniuse-features'
+
 const WEB_FEATURES_CACHE_KEY = 'web-features'
 
 const DATASET_URLS = [
   'https://unpkg.com/web-features@latest/data.json',
   'https://cdn.jsdelivr.net/npm/web-features@latest/data.json',
 ] as const
-
-export interface WebFeaturesDataset {
-  features?: Record<string, WebFeature>
-}
-
-interface WebFeature {
-  kind?: string
-  name?: string
-  description?: string
-  spec?: string[]
-  status?: {
-    baseline_low_date?: string
-    support?: Partial<Record<string, string>>
-  }
-}
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value && typeof value === 'object' && !Array.isArray(value))

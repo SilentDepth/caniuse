@@ -1,7 +1,7 @@
 import { debounce } from 'es-toolkit'
 import { computed, nextTick, onBeforeUnmount, ref, watch, type Ref } from 'vue'
 
-import type { FeatureRecord, FeatureTabId } from '@/composables/useCanIUseFeatures'
+import type { FeatureRecord, FeatureTabId } from '#shared/utils/caniuse-features'
 
 const SEARCH_RESULT_LIMIT = 20
 
@@ -34,6 +34,7 @@ function isEditableTarget(target: EventTarget | null) {
 export function useCanIUseFeatureSearch(
   features: Ref<FeatureRecord[]>,
   selectedTab: Ref<FeatureTabId>,
+  isEnabled: Ref<boolean>,
 ) {
   const isSearchMode = ref(false)
   const searchKeyword = ref('')
@@ -45,6 +46,12 @@ export function useCanIUseFeatureSearch(
   }, 500)
 
   watch(searchKeyword, value => {
+    if (!isEnabled.value) {
+      updateDebouncedSearchKeyword.cancel()
+      debouncedSearchKeyword.value = ''
+      return
+    }
+
     const normalizedValue = value.trim()
 
     if (!normalizedValue) {
@@ -54,6 +61,15 @@ export function useCanIUseFeatureSearch(
     }
 
     updateDebouncedSearchKeyword(normalizedValue)
+  })
+
+  watch(isEnabled, enabled => {
+    if (enabled) return
+
+    updateDebouncedSearchKeyword.cancel()
+    isSearchMode.value = false
+    searchKeyword.value = ''
+    debouncedSearchKeyword.value = ''
   })
 
   onBeforeUnmount(() => {
@@ -82,6 +98,8 @@ export function useCanIUseFeatureSearch(
   })
 
   function activateSearch() {
+    if (!isEnabled.value) return
+
     isSearchMode.value = true
     void nextTick(() => {
       searchTarget.value?.focusSearch()
@@ -99,13 +117,15 @@ export function useCanIUseFeatureSearch(
   }
 
   function selectTab(value: FeatureTabId) {
+    if (!isEnabled.value && value !== 'recent') return
+
     selectedTab.value = value
     isSearchMode.value = false
     searchKeyword.value = ''
   }
 
   onKeyStroke('f', (event: KeyboardEvent) => {
-    if (isSearchMode.value || isEditableTarget(event.target)) return
+    if (!isEnabled.value || isSearchMode.value || isEditableTarget(event.target)) return
 
     event.preventDefault()
     activateSearch()
